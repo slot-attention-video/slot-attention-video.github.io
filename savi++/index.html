@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="SAVi++: Towards End-to-End Object-Centric Learning from Real-World Videos">
+    <meta name="author"
+          content="Gamaleldin F. Elsayed, Aravindh Mahendran, Sjoerd van Steenkiste, Klaus Greff, Michael C. Mozer, Thomas Kipf">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+    <title>SAVi++: Towards End-to-End Object-Centric Learning from Real-World Videos</title>
+    <style>
+      h2 {
+        text-align: center;
+      }
+      .paper-title {
+        margin-top: 2em;
+        margin-left: 1em;
+        margin-bottom: 1em;
+        margin-right: 2em;
+      }
+      .authors-list .name {
+        font-size: 1.2em;
+        margin-bottom: 0.5em;
+        margin-left: 1em;
+        margin-right: 1em;
+      }
+      .paper-link a {
+        font-size: 1em;
+      }
+      .neg-space {
+        margin-top: -1.3em;
+      }
+      .teaser-image {
+        padding-left: 5%;
+        padding-right: 5%;
+        margin-bottom: 2em;
+      }
+      .waymo-video::before {
+        padding-top: 30%;
+      }
+      .content-block {
+        padding-left: .5em;
+        padding-right: .5em;
+        padding-bottom: 2em;
+      }
+      .citation .description {
+        font-family: "Courier", monospace;
+        font-size: 16px;
+        white-space: pre;
+        text-align: left;
+        padding-left: 10%;
+      }
+      .caption {
+        margin-top: 0.8em;
+      }
+      p {margin-top: 1em; margin-bottom: 1em;}
+      .footnote {
+        background-color: #e9ecef;
+        padding-top: 1em;
+        padding-bottom: 1em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="jumbotron jumbotron-fluid overflow-auto">
+
+      <!-- Title -->
+      <div class="paper-title">
+	<h1 class="name text-center">SAVi++: Towards End-to-End Object-Centric Learning from Real-World Videos</h1>
+      </div>
+
+      <!-- Authors -->
+      <div class="authors-list">
+        <p class="name text-center">
+          <a href="http://www.columbia.edu/~gfa2109/" target="_blank">Gamaleldin F. Elsayed</a>*,
+          <a href="https://aravindhm.github.io/" target="_blank">Aravindh Mahendran</a>*&dagger;,
+	        <a href="https://www.sjoerdvansteenkiste.com/" target="_blank">Sjoerd van Steenkiste</a>*&dagger;,
+          <a href="https://qwlouse.github.io/" target="_blank">Klaus Greff</a>,
+	        <a href="https://home.cs.colorado.edu/~mozer/index.php" target="_blank">Michael C. Mozer</a>,
+          <a href="http://tkipf.github.io/" target="_blank">Thomas Kipf</a>*,
+	        <br />
+          Google Research
+        </p>
+	<p class="text-center text-secondary">*equal technical contribution, &dagger;alphabetical order</p>
+      </div>
+
+      <!-- Paper link -->
+      <div class="paper-link">
+        <p class="text-center">
+          <a class="btn btn-primary" href="https://arxiv.org/abs/2111.12594" target="_blank">Paper</a>
+          <a class="btn btn-secondary disabled" href="#">Code (coming soon)</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col embed-responsive teaser-image">
+          <img src="figures/savi++.png" style="width: 100%; object-fit: contain" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p class="text-center text-secondary neg-space"><i>Figure</i>: SAVi++ model for self-supervised decomposition of real-world driving video.</p>
+        </div>
+      </div>
+
+
+      <div class="content-block">
+        <div class="row">
+          <div class="col">
+
+            <p class="description">
+            SAVi++ is an object-centric video model based on <a href="https://slot-attention-video.github.io/" target="_blank">Slot Attention for Video (SAVi)</a>, which encodes a video into a set of temporally-consistent latent variables (object slots). Objects are discovered, tracked, and segmented solely via the inductive bias of the slot-based architecture or alternatively with the help of bounding box cues in the first video frame. By utilizing sparse depth signals obtained from LiDAR as a self-supervision target, data augmentation, and architectural improvements, SAVi++ is able to &mdash; unlike prior methods &mdash; scale to complex real-world driving scenes from the <a href="https://waymo.com/open/" target="_blank">Waymo Open</a> dataset. We further find that these improvements allow SAVi++ to address video decomposition in challenging synthetic multi-object video benchmark datasets (<a href="https://github.com/google-research/kubric/tree/main/challenges/movi" target="_blank">MOVi</a>) with complex, diverse backgrounds, moving cameras, and diverse objects, which prior methods failed to decompose.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <div class="row">
+          <div class="col">
+            <h2>Qualitative Results on <a href="https://waymo.com/open/" targe="_blank">Waymo Open</a></h2>
+            <hr />
+            <p class="description">
+              When conditioned on bounding boxes in the first frame, SAVi++ is able to segment and track large objects in the scene until they leave the field of view. At this point the slot typically latches on to another object in the scene.
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md">
+            <div class="row">
+              <div class="col embed-responsive waymo-video">
+                <video muted autoplay loop playsinline>
+                  <source src="figures/savi++_conditional_1.mp4" type="video/mp4">
+                  Sorry, your browser doesn't support embedded videos.
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md">
+            <div class="row">
+              <div class="col embed-responsive waymo-video">
+                <video muted autoplay loop playsinline>
+                  <source src="figures/savi++_conditional_2.mp4" type="video/mp4">
+                  Sorry, your browser doesn't support embedded videos.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <p class="text-center text-secondary caption"><i>Figure</i>: SAVi++ resuls on Waymo Open conditioned on bounding boxes in the first frame.</p>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            <p class="description">
+              Like SAVi, SAVi++ can also be run without any conditioning cues in the first frame using randomly sampled slot initializations. We find that unconditioned (fully unsupervised) decomposition partially works on the Waymo Open dataset, although tracking consistency is lower than in the conditional case. As shown below, slots latch onto, for example, various street side objects and passing vehicles.
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md">
+            <div class="row">
+              <div class="col embed-responsive waymo-video">
+                <video muted autoplay loop playsinline>
+                  <source src="figures/savi++_unconditional_1.mp4" type="video/mp4">
+                  Sorry, your browser doesn't support embedded videos.
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md">
+            <div class="row">
+              <div class="col embed-responsive waymo-video">
+                <video muted autoplay loop playsinline>
+                  <source src="figures/savi++_unconditional_2.mp4" type="video/mp4">
+                  Sorry, your browser doesn't support embedded videos.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <p class="text-center text-secondary caption"><i>Figure</i>: Fully-unsupervised SAVi++ model results on Waymo Open.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Citation -->
+      <div class="content-block citation">
+        <div class="row">
+          <div class="col">
+            <h2>Reference</h2>
+            <hr />
+            <p class="text-center">
+              <a class="btn btn-primary" href="https://arxiv.org/abs/2111.12594" target="_blank">Paper</a>
+              <a class="btn btn-secondary disabled" href="#">Code (coming soon)</a>
+            </p>
+            <p class="description overflow-auto">@article{elsayed2022savipp,
+    author = {Elsayed, Gamaleldin F.
+              and Mahendran, Aravindh
+              and van Steenkiste, Sjoerd
+              and Greff, Klaus
+              and Mozer, Michael C.
+              and Kipf, Thomas},
+    title = {{SAVi++}: Towards end-to-end object-centric learning from real-world videos},
+    journal = {Under submission},
+    year  = {2022}
+}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footnote">
+      <div class="container">
+        <p>Correspondence to: <a href="mailto:gamaleldin@google.com">Gamaleldin Elsayed</a></p>
+      </div>
+    </div>
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+  </body>
+</html>
